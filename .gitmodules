@@ -1,0 +1,15 @@
+[submodule "isbank-spyder"]
+	path = isbank-spyder
+	url = https://www.github.com/aziznal/isbank-spyder
+[submodule "vakif-bank-spyder"]
+	path = vakifbank-spyder
+	url = https://www.github.com/aziznal/vakifbank-spyder
+[submodule "kuveytturk-spyder"]
+	path = kuveytturk-spyder
+	url = https://www.github.com/aziznal/kuveyt-turk-spyder
+[submodule "ziraat-spyder"]
+	path = ziraat-spyder
+	url = https://www.github.com/aziznal/ziraat-spyder
+[submodule "yapikredi-spyder"]
+	path = yapikredi-spyder
+	url = https://www.github.com/aziznal/yapikredi-spyder
