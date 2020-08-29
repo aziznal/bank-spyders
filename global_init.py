@@ -15,12 +15,6 @@ def get_paths(current_os):
         "ziraat-spyder"
     ]
 
-    if current_os == 'Windows':
-        paths = [f'{current_dir}\\{path}\\init_script.py' for path in paths]
-
-    elif current_os == 'Linux':
-        paths = [f'{current_dir}/{path}/init_script.py' for path in paths]
-
     return paths
 
 
@@ -33,16 +27,36 @@ def add_execute_permissions(filename):
     os.chmod(filename, st.st_mode | stat.S_IEXEC)
 
 
-def create_init_all(os, paths):
-    if os == 'Windows':
-        with open('init_all.bat', 'w') as file_:
-            for path in paths:
-                file_.write(f'call {path}\n')
+def create_init_all(current_os, paths):
 
-    elif os == 'Linux':
+    current_dir = os.getcwd()
+
+    if current_os == 'Windows':
+        with open('init_all.bat', 'w') as file_:
+                
+            for path in paths:
+                module_path = f'{current_dir}\\{path}'
+                
+                file_.write(f'cd {module_path}\n')
+                file_.write('python -m venv venv\n')
+                file_.write(f'call {module_path}\\venv\\Scripts\\activate\n')
+                file_.write('pip install -r requirements.txt\n')
+                file_.write(f'python {module_path}\\init_script.py\n')
+                file_.write(f'call {module_path}\\venv\\Scripts\\deactivate\n\n')
+
+            file_.write('\nPAUSE')
+
+    elif current_os == 'Linux':
         with open('init_all.sh', 'w') as file_:
             for path in paths:
-                file_.write(f'sh -x {path}\n')
+                module_path = f'{current_dir}/{path}'
+                
+                file_.write(f'cd {module_path}\n')
+                file_.write('python3 -m venv venv\n')
+                file_.write(f'. ./venv/bin/activate\n')
+                file_.write('pip install -r requirements.txt\n')
+                file_.write(f'python ./init_script.py\n')
+                file_.write(f'. ./venv/bin/deactivate\n\n')
 
         add_execute_permissions("init_all.sh")
 
