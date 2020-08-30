@@ -38,11 +38,14 @@ def create_init_all(current_os, paths):
                 module_path = f'{current_dir}\\{path}'
                 
                 file_.write(f'cd {module_path}\n')
+
                 file_.write('python -m venv venv\n')
                 file_.write(f'call {module_path}\\venv\\Scripts\\activate\n')
+
+                file_.write('python -m pip install --upgrade pip\n')
                 file_.write('pip install -r requirements.txt\n')
-                file_.write(f'python {module_path}\\init_script.py\n')
-                file_.write(f'call {module_path}\\venv\\Scripts\\deactivate\n\n')
+
+                file_.write(f'python {module_path}\\init_script.py\n\n')
 
             file_.write('\nPAUSE')
 
@@ -52,11 +55,14 @@ def create_init_all(current_os, paths):
                 module_path = f'{current_dir}/{path}'
                 
                 file_.write(f'cd {module_path}\n')
+
                 file_.write('python3 -m venv venv\n')
                 file_.write(f'. ./venv/bin/activate\n')
+
+                file_.write('python -m pip install --upgrade pip\n')
                 file_.write('pip install -r requirements.txt\n')
+
                 file_.write(f'python ./init_script.py\n')
-                file_.write(f'. ./venv/bin/deactivate\n\n')
 
         add_execute_permissions("init_all.sh")
 
