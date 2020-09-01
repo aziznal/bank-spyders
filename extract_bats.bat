@@ -1,1 +1,1 @@
-python extract_bat.py
+python extract_bats.py

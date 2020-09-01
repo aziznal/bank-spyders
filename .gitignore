@@ -4,5 +4,6 @@ init_all_backup.bat
 
 # Directories
 result-grapher/
+__pycache__
 bat_files
 results

@@ -5,7 +5,7 @@ from os.path import isfile, isdir
 from global_init import get_paths
 
 
-paths = get_paths()
+paths = get_paths('Linux')
 
 
 def check_folder_exists():
