@@ -27,13 +27,19 @@ def add_execute_permissions(filename):
     os.chmod(filename, st.st_mode | stat.S_IEXEC)
 
 
+def init_git_submodules(file):
+    file.write('git submodule update --init\n\n')
+
+
 def create_init_all(current_os, paths):
 
     current_dir = os.getcwd()
 
     if current_os == 'Windows':
         with open('init_all.bat', 'w') as file_:
-                
+
+            init_git_submodules(file_)
+
             for path in paths:
                 module_path = f'{current_dir}\\{path}'
                 
@@ -51,6 +57,9 @@ def create_init_all(current_os, paths):
 
     elif current_os == 'Linux':
         with open('init_all.sh', 'w') as file_:
+
+            init_git_submodules(file_)
+
             for path in paths:
                 module_path = f'{current_dir}/{path}'
                 
