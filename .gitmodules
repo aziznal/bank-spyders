@@ -13,3 +13,6 @@
 [submodule "yapikredi-spyder"]
 	path = yapikredi-spyder
 	url = git@github.com:aziznal/yapikredi-spyder
+[submodule "grapher-tool"]
+	path = grapher-tool
+	url = git@github.com:aziznal/spider-result-grapher
