@@ -273,6 +273,56 @@ def send_to_bucket():
         )
 
 
+def get_current_time():
+    """Returns a dict with keys ['hour'] and ['minutes'] with int values"""
+    current_time = datetime.now().strftime("%H-%M").split('-')
+
+    return {
+        'hour': int(current_time[0]),
+        'minutes': int(current_time[1])
+    }
+
+
+def get_current_day():
+    """
+    Returns nonabbreviated lowercase current day. e.g. saturday | monday
+    """
+    current_day = datetime.now().strftime('%A').lower()
+    return current_day
+
+
+def banks_are_closed():
+    
+    current_time = get_current_time()['hour']
+    current_day = get_current_day()
+
+    conditions = [
+        current_day == 'saturday',
+        current_day == 'sunday',
+        current_time < 9,
+        current_time >= 18
+    ]
+
+    return any(conditions)
+
+
+def upload():
+
+    load_and_clean_data()
+    send_to_bucket()
+
+    timer = wait_time
+
+    print("\n\n")
+
+    while timer > 0:
+        sleep(1)
+        timer -= 1
+        sameline_print(f"Next upload is in {timer} seconds")
+
+    print("\n")
+
+
 if __name__ == "__main__":
 
     paths = ["results/" + path + "_results.csv" for path in get_paths()]
@@ -287,14 +337,11 @@ if __name__ == "__main__":
     print(f"Data will uploaded to S3 every {wait_time / 60} minutes")
     while True:
         
-        load_and_clean_data()
-        send_to_bucket()
-
-        timer = wait_time
-
-        while timer > 0:
+        # First, confirm banks are open (i.e spider scripts are actually running)
+        while banks_are_closed():
+            sameline_print("Waiting for banks to open...")
             sleep(1)
-            timer -= 1
-            sameline_print(f"Next upload is in {timer} seconds")
-
+        
         print("\n")
+        
+        upload()
