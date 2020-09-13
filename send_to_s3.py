@@ -332,7 +332,7 @@ if __name__ == "__main__":
 
     # New data will be uploaded every 5 minutes
 
-    wait_time = 10     # 10 minutes
+    wait_time = 10 * 60     # 10 minutes
 
     print(f"Data will uploaded to S3 every {wait_time / 60} minutes")
     while True:
