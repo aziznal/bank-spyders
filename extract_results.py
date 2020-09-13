@@ -1,4 +1,4 @@
-from shutil import copy
+from shutil import copy, rmtree
 import os
 from os.path import isfile, isdir
 
@@ -13,7 +13,13 @@ def check_folder_exists():
         os.mkdir('results')
 
 
+def remove_previous_contents():
+    rmtree('results')
+
+
 def run_script():
+
+    remove_previous_contents()
 
     check_folder_exists()
 

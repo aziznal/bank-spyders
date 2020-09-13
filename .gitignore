@@ -1,9 +1,13 @@
 # Files
 init_all.bat
 init_all_backup.bat
+rootkey.csv
 
 # Directories
 result-grapher/
 __pycache__
 bat_files
 results
+venv
+clean_results
+.vscode
