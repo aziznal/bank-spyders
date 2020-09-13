@@ -3,7 +3,7 @@ import os
 import stat
 
 
-def get_paths(current_os):
+def get_paths(current_os='Linux'):
 
     current_dir = os.getcwd()
 
